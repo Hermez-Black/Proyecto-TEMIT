@@ -1,0 +1,59 @@
+@mixin full {
+    width: 100%;
+    height: 100%;
+}
+
+@mixin text-center {
+    text-align: center;
+}
+
+@mixin text-right {
+    text-align: right;
+}
+
+@mixin center-vertical-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Aqui usamos un mixin para otro mixin
+
+@mixin absolute-cover {
+    @include full;
+    // position: absolute; Esto se comento para el efecto parallax
+    // left: 0px;
+    // right: 0px;
+}
+
+@mixin caption {
+    padding: $large-padding;
+        font-weight: bold;
+        text-transform: uppercase; //Texto en mayusculas
+        font-size: 2em;
+        position: absolute;
+        letter-spacing: 5px;
+        width: auto;
+        bottom: 0px;
+        left: 10px; //alineado a la izquierda
+        z-index: 10;
+        @include text-center;
+        // color: $grey;
+        color: rgba($grey, 0.5);
+}
+
+@mixin main-text {
+    font-weight: 200;
+    font-size: 1.2em;
+    line-height: 1.5em; //espacio entre lineas de texto
+    h1, h2{
+        font-size: $big;
+        font-weight: inherit;
+        letter-spacing: 0.3em;
+        line-height: 1.5em;
+    }
+}
+
+@mixin transition {
+    transition: all 0.6s ease-out;
+}

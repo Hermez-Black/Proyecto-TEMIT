@@ -1,0 +1,356 @@
+¿Qué es Webpack?
+ Es una herramienta extremadamente útil cuando desarrollas aplicaciones web diseñadas con filosofía modular,
+  es decir, separando el código en módulos que luego se utilizan como dependencias en otros módulos. 
+  Una de las cosas que hace realmente bien Webpack es la gestión de esos módulos y de sus dependencias, 
+  pero también puede usarse para cuestiones como concatenación de código, minimización y ofuscación, verificación 
+  de buenas prácticas (linting), carga bajo demanda de módulos, etc...
+
+  Webpack es una herramienta de compilación (una build tool en la jerga) que coloca en un grafo de dependencias
+   a todos los elementos que forman parte de tu proyecto de desarrollo: código JavaScript, HTML, CSS, plantillas, 
+   imágenes, fuentes... Esta idea central es la que lo convierte en una herramienta tan poderosa.
+
+
+El PROYECTO ESTARÁ ECHO PARA INTERNET LENTO, INTERNET RÁPIDO(NORMAL) Y SIN INTERNET.
+COLOCAREMOS UN MAPA, VARIAS FUNCIONALIDADES, CSS, HTML, JS, WEBPACK, SASS
+
+
+
+Instalamos Webpack
+
+    npm install --save-dev webpack
+
+Creamos un archivo de configuración para webpack, con el nombre de "webpack.config.js"
+
+En este archivo vamos a hacer la configuración básica, aunque webpack ya tiene configuraciones por defautl
+
+vamos a exportar modulos 
+
+module.exports = {}
+
+para esto siempre vamos a necesitar un punto de entrada  
+
+Creamos otra carpeta que se llamará assets 
+
+
+
+BORRA EL PROYECTO Y VUELVE A INSTALAR TODO PERO CON EL WEBPACK CLI EN OTRA CARPETA
+
+
+
+Debemos instalar server de webpack:  
+
+     npm install webpack-dev-server --save-dev
+
+Este servidor solo es para ejecutar nuestra aplicación en local.
+
+pero al iniciar el servidor de webpack nos pedirá el cliente de webpack
+
+The CLI moved into a separate package: webpack-cli
+Please install 'webpack-cli' in addition to webpack itself to use the CLI
+-> When using npm: npm i -D webpack-cli
+-> When using yarn: yarn add -D webpack-cli
+node:internal/modules/cjs/loader:922
+  throw err;
+
+  Al final para solucionar el error copiamos y pegamos configuraciones de un archivo package.json 
+
+  { "name": "desarrollo_web_frontend", "version": "1.0.0", "description": "proyecto frontend con las 
+  ultimas tecnologias", "main": "index.js", "scripts": { "test": "echo \"Error: no test specified\" && exit 1", 
+  "start": "webpack-dev-server --open --config webpack.config.js" }, "keywords": [ "front", "end", "javascript", 
+  "html", "css" ], "author": "Alain Barrios", "license": "ISC", "devDependencies": { "webpack": "^4.16.5", 
+  "webpack-cli": "^3.1.0", "webpack-command": "^0.4.1", "webpack-dev-server": "^3.1.5" } }
+
+  -D   es lo mismo  que --save -dev
+
+  cuando colocamos todo ese json en el archivo package.json, ejecutamos el npm install y con eso nos deberia de 
+  jalar
+
+
+ 
+              ---> HTML Webpack plugin <---
+
+Debemos instalar una libreria más para poder servir archivos html 
+
+  npm install html-webpack-plugin -D 
+
+  o
+
+  npm install html-webpack-plugin --save-dev
+
+
+para quitar el error sobre que no encuentra el archivo entry.js, dentro de javascript, dentro de assets
+
+creamos la carpeta javascript y el archivo entry.js
+
+importamos la nueva libreria que instalamos en el archvo de configuración de webpack
+
+cuando importemos el modulo o libreria, procurar iniciar la variable con mayuscula, ya que es una clase
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+cuando hacemos cambios el servidor se actualiza solo y se complila solo, o sea automaticamente se actualiza la 
+página. sin necesidad de instalar nodemon 
+
+
+  ¿Qué hicimos en este capitulo?
+
+Simplemente añadimos un plugin a webpack.config, para poder servir u archivo html.
+
+instalamos el plugin, lo importamos en el archivo de configuración de webpack, sabiendo que es una clase
+iniciamos un objeto nuevo que tendra la ruta del template y el archivo index donde se ejecutará.
+ese nuevo objeto del plugin lo pasamos al array de plugin y ya solo corregimos el error de que no encontraba la 
+carpeta y la ruta de entry.js
+
+
+          ---> Configurar SASS y Webpack <---
+
+SASS es CSS con superpoderes, como una especie de react con redux, ya que tiene una infinidad de beneficios 
+ para proyectos grandes.
+
+Le meteremos css al proyecto desde SASS y webpack
+
+para usar SASS necesitamos loaders 
+
+npm install style-loader css-loader sass-loader --save-dev or -D
+
+también instalar 
+
+      npm install node-sass --save-dev
+
+  
+al instalar todos esos modulos, nosotros podemos empezar a usar sass
+
+primero tenemos que crear reglas en el archivo de configuracion de webpack
+la primera es test y la segunda es use 
+
+en la carpeta assets creamos una nueva carpeta llamada css, esta contrenda el archivo app.scss
+que sera práticamente el archivo de los styles por ahora, 
+
+para poder ver los cambios tenemos que ir al punto de entrada de webpack
+que es el archivo entry e importar el archivo app.scss
+
+test lo que nos permite es especificar una condición para el recurso que vamos a utilizar, 
+en esta ocasión vamos a aplicarlo a todos los archivos con .scss
+
+y use seria que para todos los archivos que tengan la extención .scss
+use los loaders:
+'style-loader' -> este es para inyectar estilos en el dom via una style talk
+
+'css-loader' -> este es para cargar estilos de css e inyectarlos
+
+'sass-loader' -> transformar sass en css para que pueda trabajar css-loader, los tres plugins
+                    son importantes
+
+
+html webpack hard disk plugin es para poder ver el archivo html en el disco duro y poder hacerle testing o modificarlo
+
+para poder agregar las imagenes de tu proyecto, solo instala "npm install url-loader -D"
+
+crea una carpeta public y en el archivo de configuracion coloca 2 reglas más de test y loader
+
+la primera para todos los archivos /\.jpg$/  y la segunda para los plugins que es el que instalaste 'url-loader'
+
+{
+  test: /\.jpg$/,
+  loader: 'url-loader'
+}
+
+
+LO QUE HICIMOS EN EL SEGUNDO BLOQUE DE WEBPACK FUE PREPARAR NUESTRO ENTORNO DE TRABAJO PARA PODER EMPEZAR A HACER
+LA ESTRUCTURA WEB Y TODO ESO, O SEA CONFIGURAR WEBPACK PARA PODER HACER EL SITIO WEB CON SASS Y TODO ESO.
+
+
+
+
+              ----LAYOUT----  BLOQUE 3
+
+  ####  Estructura de la página...
+
+El video solo fue de la Estructura html, le colocamos nombre al titulo y una etiqueta name, meta, en la cabeza
+donde decimos que si la página se abre en un dispositivo movil, se ajuste de acuerdo al tamñano.
+
+  ####  Contenido inicial.
+
+vamos a dividir por secciones la página principal.
+
+una seccion el home, otra el mapa, otra el menu, etc.
+
+En la primera seccion tenemos dos componentes el texto y la imagen.
+
+el texto tiene titulo y parrafos que describen el objetivo,
+la imagen es de acuerdo al objetivo, 
+
+entonces colocamos el texto correspondiente y una imagen relacionada.
+sin css, solo es la Estructura html
+usamos figcaption para ponerle texto debajo de la imagen, también aprendimos que alt sirve para 
+personas con capacidades distintas.
+
+también donde esat la página web terminada.
+usamos la etiqueta figure para poder colocar imagenes dentro de la página y ya.
+
+
+  ####  CSS Grid filas y columnas...
+
+Mantenimiento, 
+codigo separado,
+fluida, dinamica, 
+facil de modificar,
+reutilizable, 
+reciclabe.
+
+Css grid es para que nosotros posicionemos componentes en nuestra pagina web.
+
+el valor repeat repite las veces que queremos que se repita un valor de la division
+
+repeat(numero de veces, valor)
+
+ejemplo: repeat(12, 1fr)
+
+fr es una fraccion del espacio que esta disponible. es como si fuera una fraccion de la pantalla
+
+el ejemplo de arriba es para dividir en doce fracciones iguales.
+
+para usar grid en css colocamos 
+
+.grid {
+  display: grid;
+  aqui todos las funciones que necesitemos 
+}
+
+en este caso grid-template-columns: es para dividir de forma horizontal el LAYOUT.
+
+y para vertical -> grid-template-rows:    este es para dividirlo en filas.
+
+vamos a dividir en dos bloques el primer componente.
+
+el bloque del texto y el bloque de la imagen.
+
+estos estaran dentro del div de grid. para poder acomodarlos. 
+
+podemos decirle donde debe comenzar el componente y donde debe terminar.
+
+para decirle donde empezar --> grid-column-start: n;    n -> es la columna o el numero de la columna
+
+para decirle donde debe terminar --> grid-column-end: n;  n -> es la columna o el numero de la columna
+
+pero hay una que junta las dos --> grid-column: ; en esta podemos separar los valores de inicio y final con una...
+...diagonal /       grid-column: inicio / final;      ejemplo -->   grid-column: 1 / 12;
+
+no se comienza en 0 cero como en la programación. 
+
+RESUMEN:  -->  Lo que hicimos en este capitulo fue entender grid, acomodar los componentes, entender algunas...
+... funcionalidades de grid y dividir el primer componente para poder acomodarlo.
+
+
+        ### Grid AREAS ###
+
+Lo unico que hicimos fue añadir responsive desing al componente con movile first
+y definirle un area a cada elemento.
+
+En Span y subgrids, lo que haremos sera ser consistentes y hacer más dinamico el diseño colocando los espacios para todos 
+los componentes.  lo que se coloco fue un container para reutiliazar los espacios en blanco
+
+
+
+
+
+
+
+      ####  Variables ####
+
+creamos una carpeta para cada uno de los archivos que almacenen variables o mixin que mixin son como ajustes o estilos genericos
+
+
+
+                ****  EFECTO PARALLAX  ****
+
+Para el efecto PARALLAX, Debemos crear dos secciones una para la imagen y otra para el scroll
+
+en el primer elemento tenemos dos clases la primera el cover que tendra como debe ir la imagen y la segunda 
+el parallax que tendra la imagen en si
+
+la section de scroll tendra un estilo de un minimo de altura de 100vh
+
+la clave para lograr el efecto parallax esta en usar la propiedad background-attachment: fixed;
+este estara en la clase anidada de parallax
+
+o sea fijado ya que el fondo se queda quieto mientras nosotros hacemos el scroll
+
+
+EL PROYECTO ESTA DIVIDIDO EN 7 PARTES O COMPONENTES
+
+EL principal - ya esta
+PARALLAX - ya esta
+SLIDER
+OUR MISION
+MAPA
+CONTACT US 
+MENU TOGGLE
+
+
+Para el precargado de imagenes lo que hicimos fue crear una clase preloader lo que hacia era generar promesas en base 
+a las imagenes 
+
+con esa clase lograbamos hacer que cuando se cargarán las imagenes se generará el slider manual.
+
+Para el mapa es sencillo.
+
+podemos insertar un mapa rápido con la api de google en el lugar ubicado y desde maps le damos en share,
+luego en "Embed map"
+
+y ahí logramos tener unas lineas con etiquetas html para poder insertarlo en nuestra web
+
+Esta es una solución rápida pero no tan buena para poder manipular bien el mapa, para alguién que no sabe mucho 
+de programación es una solución rápida.
+
+Para hacerlo bien tenemos que hacerlo vía código, desde la api de google.
+
+Primero hay que tener una cuenta de google, después irnos a https://console.developers.google.com/
+
+ahí creamos un nuevo proyecto, después nos vamos en habilitar api, buscamos la api de maps 
+
+despues nos vamos a las credenciales, creamos una clave api con la restriccion adecuada en este caso 
+
+la de url o el dominio, importamos un script en el html 
+
+que contendra una url de donde sacaremos el mapa 
+
+script src="https://maps.googleapis.com/maps/api/js"
+
+despues de la url colaremos un ?key= 
+
+y la clave que obtuvimos AIzaSyBpY5AxqQg8zCXEEVKF0bqHybf8tVjPST8 en este caso 
+
+ya todo junto queda así ->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpY5AxqQg8zCXEEVKF0bqHybf8tVjPST8">
+
+Tenemos un problema y es que las apis dejaron de ser gratuitas 
+ahora se debe pagar, una lastima. se hará lo que se pueda.
+
+Por lo que entonces pondremos el mapa comun y corriente.
+
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpY5AxqQg8zCXEEVKF0bqHybf8tVjPST8"> --> 
+    <!-- </script> -->
+
+NAVEGACION 
+
+Si le colocamos a una etiqueta a en el atributo href un id de otro componente o etiqueta html
+este al darle click nos llevará a ese componente
+
+por ejemplo ->  hay un componente con id="home"
+
+nosotros colocamos un a que tenga href="#home"
+
+
+
+
+
+
+GARBAGE
+    <!-- Scroll para el efecto parallax -->
+<!-- 
+    <section class="space-bottom">
+        
+    </section> -->
