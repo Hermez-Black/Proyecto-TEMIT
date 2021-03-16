@@ -59,14 +59,53 @@ figure {
     // background-color: $green;
 }
 
+.menu {
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border: solid 1px $blue;
+    z-index: 130;
+    @include center-vertical-horizontal;
+    @include transition;
+    transition-duration: 0.15s;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $light-blue;
+    }
+
+    img{
+        height: 50px;
+    }
+}
+
 .menu-screen{
-    background-color: #3c6e71;
+    background: rgba(40, 147, 138, 0.46);
     height: 100vh;
     width: 100vw;
     position: fixed;
     z-index: 130;
+    top: -101vh; //Esto es para ocultarlo.
     @include center-vertical-horizontal;
     @include transition;
+    // transition-duration: 0.4s;
+
+    .close{
+        position: absolute;
+        top: 2em;
+        right: 2em;
+        img{
+            height: 45px;
+        }
+    }
+
+    &.active{
+        top: 0;
+    }
+
     a{
         display: block;
         text-decoration: none;

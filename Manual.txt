@@ -344,7 +344,50 @@ por ejemplo ->  hay un componente con id="home"
 nosotros colocamos un a que tenga href="#home"
 
 
+SERVICE WORKERS (Páginas sin internet)
 
+Esto lo que hará es que cuando el usuario ingrese a la página web, el service worker descargará lo necesario 
+para que cuando la persona quiera entrar una segunda o tercera vez, entre de forma rápida y también 
+pueda entrar sin necesidad de tener internet, o sea offline.
+
+para mostrar archivos, cache, aqui podemos guardar archivos para los sitios web, es como un proxy
+
+    --- Para instalar service worker ---
+
+Creamos un nuevo archivo desde la raiz del proyecto, con el nombre sw.js.
+
+En sí lo que necesitamos es que nuestra página se vea aún cuando no haya internet.
+
+Funciona de manera asincrona, para ello agregaremos listeners:
+
+Install -> Para la primera vez que se instala, descargar los archivos y guardarlos
+
+activate -> Hace referencia al momento en que la service worker se actualiza, la primera vez que se instala o cuando
+  modificamos la service worker y este se actualiza.  Mantener actualizado, eliminar archivos o guardar nuevos
+
+fetch -> Se evalua cada que se hace una petición al servidor remoto.
+
+siempre vamos a comenzar los listeners con self. y una funcion
+
+self.addEvenListener('install', function(){
+  
+})
+  Este solo se ejecuta la primera vez que se registra la serviceWorker
+
+Lo que hicimos fue guardar el archivo html index, con el listener install, registramos el navegador solo si tiene
+serviceWorker, despues abrimos el cache storage y añadimos el index
+
+Ahora para mantener el cache actualizado ->  'activate'
+  Hay que recordar tener un control de cache vigentes, en la página web, para saber que eliminar y que no
+  Este se ejecuta cada que el navegador detecta cambios, para actualizarlo
+
+  
+Para enviar archivos desde el cache, Usamos fetch, con este mismo daremos una respuesta cuando no haya internet
+o sea este offline.
+
+
+Más sobre las service workers https://codigofacilito.com/articulos/que-es-sw-pwa
+https://codigofacilito.com/videos/promesas
 
 
 
@@ -354,3 +397,113 @@ GARBAGE
     <section class="space-bottom">
         
     </section> -->
+
+
+
+
+
+ARCHIVO sw.js
+
+
+
+
+
+
+
+
+
+const CACHE_NAME = 'STORIES_CACHE-v2'; // -> Esto normalmente se utiliza en una service Worker, por eso se guarda en una constante
+// También es util poder versionar el cache, por si queremos actualizarlo o eliminarlo 
+// Es complicado invalidarlo, por eso el versionamiento
+
+self.addEventListener('install', function(){
+    //Guardar los archivos iniciales
+    // Cache -> Api de js para poder guardar archivos de manera local en la pc del usuario
+    caches.open(CACHE_NAME).then(function (cache) {
+        cache.addAll(['/index.html', '/dist/javascript/bundle.js', '/public/images/1.jpg']);
+    })
+});
+
+
+// ACTUALIZAR CACHE DE ARCHIVOS
+
+
+self.addEventListener('activate', function(ev){
+    // caches.delete(CACHE_NAME)
+    ev.waitUntil(
+        caches.keys().then(function(cacheNames){
+            let promises = cacheNames.map(cacheName => {
+                if(CACHE_NAME !== cacheName) return caches.delete(cacheName);
+            }); 
+            return Promise.all(promises);  //De esta promesa estamos esperando que retorne todas las de delete
+        })
+    );
+});
+
+// Como invalidamos versiones viejas del caches y eliminamos para que no hagan basura
+// Keys() Lo que nos retorna es una colección con los nombres de los caches, en forma de promesa, then se ejecuta
+// Cuando se cumple la promesa.
+
+
+
+// // ENVIAR ARCHIVOS DESDE LA CACHÉ 
+
+// self.addEventListener('fetch', function(ev){
+//     ev.respondWith(  //Así es como hacemos que la sw espere una respuesta y responda con el resultado o con lo que le estamos enviando
+//         // Vamos a buscar la peticion que hace el navegador al caches
+//         caches.match(ev.request)
+//             .then(function(response){
+//                 // console.log(response);
+//                 // return fetch(ev.request);
+//                 return response || fetch(ev.request);
+//             })
+//     )
+// });
+
+
+
+// Enviar respuesta cuando no hay internet
+
+// self.addEventListener('fetch', function(ev){
+//     ev.respondWith(
+//         caches.match(ev.request)
+//             .then(function(response){
+//                 return response || fetch(ev.request);
+//             }).catch(function (err) {
+//                 if(ev.request.mode == "navigate")  //Esta validacion de navigate es porque a veces se hacen demasiadas peticiones y provocan algunos errores
+//                     return caches.match(ev.request);  // Esto significa que unicamente los archivos que estan en el catch son los que van a tener respuesta cuando este offline 
+//             })
+//             // catch es para tomar el error e interceder para que se muestre algo a pesar de que no hay internet
+//     )
+// });
+
+
+
+// Enviar respuesta cuando no hay internet
+
+self.addEventListener('fetch', function(ev){
+    ev.respondWith(
+        caches.match(ev.request).then(function(response){
+                return searchCacheOrMakeRequest(ev.request);
+                //Esto que significa?  Que busque en el cache o haga una petición y actualice el cache
+            }).catch(function (err) {
+                if(ev.request.mode == "navigate")
+                    return caches.match(ev.request);
+            })
+    )
+});
+
+function searchInCacheOrMakeRequest(request){
+    const cachePromise = caches.open(CACHE_NAME);
+    const matchPromise = cachePromise.then(function(cache){
+        return cache.match(request);
+    });
+
+    return Promise.all([cachePromise,matchPromise]).then(function([cache,cacheResponse]){
+        const fetchPromise = fetch(request).then(function(fetchResponse) {
+            cache.put(request, fetchResponse.clone());
+            return fetchResponse;
+        });
+        return cacheResponse || fetchPromise;
+    })
+};
