@@ -428,7 +428,7 @@ recuerda instalar html-loader
 
     npm install html-loader
 
-
+Ahora para saber si funiona 
 
 
 GARBAGE
