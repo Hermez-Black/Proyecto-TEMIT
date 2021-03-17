@@ -391,6 +391,46 @@ https://codigofacilito.com/videos/promesas
 
 
 
+
+Para extraer estilos en un archivo css
+
+para producción, necesitamos instalar un nuevo modulo 
+
+  npm install extract-text-webpack-plugin
+
+intentar con --force 
+
+en producción
+
+luego importamos el extractor de webpack
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+Primero extraemos los estilos -> 
+
+const extractSass = new ExtractTextPlugin({
+  filename: 'dist/css/[name].[contenthash].css'
+})
+
+Esto lo que hace es que cada que cambiamos ese archivo, creamos uno nuevo, así si tenemos cacheado un archivo de estos 
+el nombre cambiará, es dinamico, ya que ningun usuario se quedara con un archivo antiguo
+
+también debemos instalar webpack-merge
+
+  npm install webpack-merge
+
+creamos los comandos correspondientes para producción y dev en el package.json
+
+start -> webpack-dev-server --open --config webpack/webpack.dev.js
+build -> webpack --config webpack/webpack.prod.js
+
+recuerda instalar html-loader 
+
+    npm install html-loader
+
+
+
+
 GARBAGE
     <!-- Scroll para el efecto parallax -->
 <!-- 
@@ -403,9 +443,6 @@ GARBAGE
 
 
 ARCHIVO sw.js
-
-
-
 
 
 
