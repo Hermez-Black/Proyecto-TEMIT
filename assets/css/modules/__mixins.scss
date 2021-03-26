@@ -38,8 +38,8 @@
         left: 10px; //alineado a la izquierda
         z-index: 10;
         @include text-center;
-        // color: $grey;
-        color: rgba($grey, 0.5);
+        color: $grey;
+        // color: rgba($grey, 0.5);
 }
 
 @mixin main-text {
@@ -57,3 +57,67 @@
 @mixin transition {
     transition: all 0.6s ease-out;
 }
+
+@mixin card-client {
+        margin-top: $default-margin-top;
+        display: flex;
+        flex-direction: column;
+        @include center-vertical-horizontal;
+        padding: 10px;
+        border: 2px solid $blue-card;
+        border-radius: 8px;
+        .title{
+            font-weight: 14;
+            color: $blue-card;
+        }
+        .subtitle{
+            font-weight: 10;
+            color: grey;
+            margin-top: -10px;
+        }
+
+        .parrafo{
+            letter-spacing: 0.4px;
+            margin-top: -6px;
+        }
+
+        a {
+            color: $blue-card;
+            letter-spacing: 0.4px;
+            text-decoration: none;
+            &:first-of-type{
+                margin-right: 9px;
+            }
+    }
+}
+
+//     margin-top: $default-margin-top;
+                            //     display: flex;
+                            //     flex-direction: column;
+                            //     @include center-vertical-horizontal;
+                            //     padding: 10px;
+                            //     border: 2px solid #17A2B8;
+                            //     border-radius: 8px;
+                            //     .title{
+                            //         font-weight: 14;
+                            //         color: #17A2B8;
+                            //     }
+                            //     .subtitle{
+                            //         font-weight: 10;
+                            //         color: grey;
+                            //         margin-top: -10px;
+                            //     }
+                                
+                            //     .parrafo{
+                            //         letter-spacing: 0.4px;
+                            //         margin-top: -6px;
+                            //     }
+                                
+                            //     a {
+                            //         color: #17A2B8;
+                            //         letter-spacing: 0.4px;
+                            //         text-decoration: none;
+                            //         &:first-of-type{
+                            //             margin-right: 9px;
+                            //         }
+                            // }

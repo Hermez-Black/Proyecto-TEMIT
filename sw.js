@@ -1,4 +1,4 @@
-const CACHE_NAME = 'STORIES_CACHE-v2';
+const CACHE_NAME = 'STORIES_CACHE-v3';
 
 self.addEventListener('install',function(){
   // Guardar archivos iniciales

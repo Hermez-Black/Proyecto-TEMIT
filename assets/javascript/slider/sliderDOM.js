@@ -31,7 +31,7 @@ let slider = new Slider({
         }, 600);
 
     },
-    speed: 6000
+    speed: 11000
 });
 
 slider.play();

@@ -5,10 +5,12 @@
 body {
     font-family: 'Source Sans Pro', sans-serif;
     margin: 0px;
+    padding: 0;
 }
 
 img {
     max-width: 100%;
+    // max-height: 100%;
 }
 
 // Selectores anidados sass
@@ -18,7 +20,8 @@ img {
 figure {
     position: relative;
     max-height: 100%;
-    margin: 0px;
+    margin: 10px;
+    margin-top: 20px;
     figcaption{
         @include caption;
     }
@@ -27,6 +30,7 @@ figure {
 }
 
 .btn {
+    // background: $white;
     padding: $large-padding;
     position: relative;
     color: $black !important;
@@ -72,7 +76,7 @@ figure {
     @include transition;
     transition-duration: 0.15s;
     cursor: pointer;
-
+    background: $light-light-blue;
     &:hover{
         background-color: $light-blue;
     }
@@ -83,7 +87,8 @@ figure {
 }
 
 .menu-screen{
-    background: rgba(40, 147, 138, 0.46);
+    // background: rgba(40, 147, 138, 0.46);
+    background: $light-light-blue;
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -120,7 +125,7 @@ figure {
         }
         span:not(.main){ // Un selector de span pero que no tenga la clase main. Nos permite especificar otro selector para que no se aplica al que definimos 
             // lo que dice es selecciona un span pero que no tenga la etiqueta main.
-            color: $rose;
+            color: $orange;
             opacity: 0;
             @include transition;
             transition-duration: 0.2s;
@@ -169,13 +174,20 @@ figure {
     "title title title title title title title title title"
     "image image image image image image image image image"
     ;
+    // .h1{
+        // display: flex;
+        // text-align: center;
+        // margin-left: 100px;
+    // }
     .text {
         grid-area: title;
         @include main-text;
     }
     
     .image {
+        margin-top: $big-margin-top;
         grid-area: image;
+        // height: 50vh;
     }
 }
 // Este es para computadoras, si la anchura del dispositivo es de 960px o más, aplica esto.
@@ -202,7 +214,7 @@ figure {
 
     &.parallax{
         background-attachment: fixed;
-        background-image: url(../../public/images/3.jpg);
+        background-image: url(../../public/temit-images/pexels-photo-373543_optimized.jpg);
         position: relative;
         p{
             @include caption;
@@ -211,6 +223,7 @@ figure {
             width: 100%;
             box-sizing: border-box;
             left: 0px;
+            color: $grey;
             @include text-right;
             span{
                 display: block;
@@ -245,12 +258,13 @@ figure {
         }
     }
     .image{
-        min-height: 100vh;
+        margin-top: 0;
+        // min-height: 100vh;
         display: flex;
         align-items: center;
     }
     header{
-        background-color: $blue;
+        background-color: rgba(0, 53, 102, 0.966);
         color: $white;
         padding: $big-padding;
         transform: translateY(40px);
@@ -308,12 +322,16 @@ figure {
         figure{
             float: right;
             margin-left: 10px;
+            figcaption{
+                color: #219ebc
+            }
         }
         p{
             line-height: 2em;
-            &:nth-of-type(1){
-                // Este selector nos permite seleccionar uno de un conjunto de varios 
+            // &:nth-of-type(1){
+                // Este selector de arriba nos permite seleccionar uno de un conjunto de varios 
                 // En este caso un parrafo de un conjnto de 2
+            &:first-of-type{
                 margin-bottom: 3em;
                 position: relative;
                 // border-bottom: solid 2px;
@@ -322,14 +340,64 @@ figure {
                     background-color: $blue;
                     position: absolute;
                     bottom: -1.5em;
-                    height: 5px;
+                    height: 6px;
                     width:70%;
+                    margin-left: -200px;
                     z-index: -1; //Debajo de todos los elemento 
                 }
             }
         }
     }
 }
+
+// Galery
+
+#Galery{
+    margin-top: $default-margin-top;
+    margin-bottom: $default-margin-top;
+    .grid{
+        .container{
+            .title-galery{
+                @include text-center;
+                @include main-text;
+            }
+            .row {
+                .col-md-4 {
+                    // width: 33.3333%;
+                    width: 100%;
+                    padding: 8px;
+                    img{
+                        width: 100%;
+                        margin-top: 23px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Client{
+    margin-top: $default-margin-top;
+    margin-bottom: $big-margin-top;
+    .grid{
+        .container{
+            .title-client{
+                @include text-center;
+                @include main-text;
+            }
+            .grid-card{
+                .column{
+                        .card {
+                            @include card-client;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
 
 .full-height{
     min-height: 90vh;
@@ -374,9 +442,23 @@ figure {
         grid-template-columns: repeat(9,1fr);
         grid-template-areas: 
         "title title title image image image image image image";
+        .image{
+            margin-top: 0;
+        }
     }
-
+    .mission{
+        .container{
+            p{
+                &:first-of-type{
+                    &::after{
+                        margin-left: -80px;
+                    }
+                }
+            }
+        }
+    }
     .slider{
+        margin-top: 200px;
         align-items: center;
         header{
             transform: translateX(100px);
@@ -385,6 +467,54 @@ figure {
         }
     }
 
+    // Galery
+
+    #Galery{
+        margin-top: $default-margin-top;
+        margin-bottom: $big-margin-top;
+        .grid{
+            .container{
+                .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    box-sizing: border-box;
+                    .col-md-4 {
+                        // width: 33.3333%;
+                        width: 31.3333%;
+                        padding: 8px;
+                        img{
+                            width: 100%;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #Client{
+        margin-top: $default-margin-top;
+        margin-bottom: $big-margin-top;
+        .grid{
+            .container{
+                .title-client{
+                    @include text-center;
+                    @include main-text;
+                }
+                .grid-card{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    column-gap: 35px;
+                    // row-gap: 40px;
+                    .column{
+                            .card {
+                                @include card-client;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     .social{
         a{
@@ -396,4 +526,66 @@ figure {
             }
         }
     }
+}
+
+@media (min-width: 1300px){
+
+    .mission{
+        .container{
+            p{
+                &:first-of-type{
+                    &::after{
+                        margin-left: -300px;
+                    }
+                }
+            }
+        }
+    }
+
+    #Galery{
+        margin-top: $default-margin-top;
+        margin-bottom: $default-margin-top;
+        .grid{
+            .container{
+                .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    box-sizing: border-box;
+                    .col-md-4 {
+                        // width: 33.3333%;
+                        width: 31%;
+                        padding: 7px;
+                        img{
+                            width: 100%;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #Client{
+        margin-top: $default-margin-top;
+        margin-bottom: $big-margin-top;
+        .grid{
+            .container{
+                .title-client{
+                    @include text-center;
+                    @include main-text;
+                }
+                .grid-card{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    column-gap: 35px;
+                    .column{
+                            .card {
+                                @include card-client;
+                            }
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -9,6 +9,14 @@ function scrollToElement(element){
 };
 // element.offsetTop tiene todas las medidas de cada componente del archivo html, que le des 
 
+// Este condicional, este pedazo de código es para que cuando le demos al boton de ver más haga la animacion
+if(window.scrollTo) {
+    document.querySelector(".btn").addEventListener("click", (ev) => {
+        ev.preventDefault()
+        scrollToElement(document.querySelector(".controls"))
+        }
+    )
+};
 
 // Para abrir y cerrar el menu, podemos usar el archivo entry
 document.querySelector(".menu").addEventListener("click", () => {
