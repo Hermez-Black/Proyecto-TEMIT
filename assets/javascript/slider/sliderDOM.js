@@ -8,7 +8,6 @@ let sliderSubTitle = document.querySelector("#slider-subtitle");
 let sliderImage = document.querySelector("#slider-image");
 let textContent = document.querySelector("#slider-text-content");
 
-// Obtenemos las flechas 
 
 let leftArrow = document.querySelector(".left-arrow");
 let rightArrow = document.querySelector(".right-arrow");

@@ -1,7 +1,6 @@
 const CACHE_NAME = 'STORIES_CACHE-v3';
 
 self.addEventListener('install',function(){
-  // Guardar archivos iniciales
 
   caches.open(CACHE_NAME).then(function(cache){
     cache.addAll(['/index.html','/dist/javascript/bundle.js','/public/images/1.jpg']);

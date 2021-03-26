@@ -10,12 +10,7 @@ body {
 
 img {
     max-width: 100%;
-    // max-height: 100%;
 }
-
-// Selectores anidados sass
-// Esto es anidar selectores, esto nos quiere decir que para que pueda ejecutar los estilos debe estar 
-        // Dentro de figure(la primera clase o clase contenedora)
 
 figure {
     position: relative;
@@ -25,22 +20,18 @@ figure {
     figcaption{
         @include caption;
     }
-    // &:hover{// este ampersan es para referirnos a la clase principal que es figure, pero con ese signo
-    // }
 }
 
 .btn {
-    // background: $white;
     padding: $large-padding;
     position: relative;
     color: $black !important;
-    text-decoration: none; // quita la linea
+    text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
     box-sizing: border-box;
-    &:before{ //before significa que Es usado normalmente para añadir contenido estético a un elemento, 
-        // usando la propiedad content. Este elemento se muestra en línea con el texto de forma predeterminada.
-        content: ''; //no añade nada pero si estilos
+    &:before{
+        content: '';
         position: absolute;
         width: 100%;
         bottom: 0px;
@@ -48,8 +39,7 @@ figure {
         height: 30%;
         background-color: $light-blue;
         z-index: -1;
-        transition: all 0.20s ease-out; // all es para que haga la transicion a todas las propiedades modificadas, tiempo de duracion
-        // ease-out acelera la animacion y la frena al final.
+        transition: all 0.20s ease-out;
     }
     &:hover::before{
         height: 100%;
@@ -57,10 +47,8 @@ figure {
 }
 
 .grid {
-    // @include full;
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    // background-color: $green;
 }
 
 .menu {
@@ -87,16 +75,14 @@ figure {
 }
 
 .menu-screen{
-    // background: rgba(40, 147, 138, 0.46);
     background: $light-light-blue;
     height: 100vh;
     width: 100vw;
     position: fixed;
     z-index: 130;
-    top: -101vh; //Esto es para ocultarlo.
+    top: -101vh; 
     @include center-vertical-horizontal;
     @include transition;
-    // transition-duration: 0.4s;
 
     .close{
         position: absolute;
@@ -117,20 +103,18 @@ figure {
         @include text-center;
         position: relative;
         margin-top: 1em;
-        &:first-of-type{ margin-top: 0; } // este selecciona al primer elemento del conjunto y le quita el margin
+        &:first-of-type{ margin-top: 0; } 
         .main{
             display: block;
             font-size: 2em;
             color: $light-blue;
         }
-        span:not(.main){ // Un selector de span pero que no tenga la clase main. Nos permite especificar otro selector para que no se aplica al que definimos 
-            // lo que dice es selecciona un span pero que no tenga la etiqueta main.
+        span:not(.main){ 
             color: $orange;
             opacity: 0;
             @include transition;
             transition-duration: 0.2s;
         }
-        // Con el width de 0 a 100 aparecera de izquerda a derecha con la scala aparecera de forma distinta desde dentro hacia afuera(usaremos ese)
         &::after{
             content: '';
             position: absolute;
@@ -156,15 +140,6 @@ figure {
     }
 }
 
-
-// Esto es para dispositivos como computadoras.
-// .grid-main-area {
-//     display: grid;
-//     grid-template-columns: repeat(9,1fr);
-//     grid-template-areas: ". title title image image image image image .";
-// }
-
-// Movile First Para moviles y dispositivos pequeños
 .grid-main-area {
     display: grid;
     grid-template-columns: repeat(9,1fr);
@@ -174,11 +149,7 @@ figure {
     "title title title title title title title title title"
     "image image image image image image image image image"
     ;
-    // .h1{
-        // display: flex;
-        // text-align: center;
-        // margin-left: 100px;
-    // }
+    
     .text {
         grid-area: title;
         @include main-text;
@@ -190,17 +161,7 @@ figure {
         // height: 50vh;
     }
 }
-// Este es para computadoras, si la anchura del dispositivo es de 960px o más, aplica esto.
-// @media (min-width: 960px){
-//     .grid-main-area {
-//         display: grid;
-//         grid-template-columns: repeat(9,1fr);
-//         grid-template-areas: 
-//         ". title title image image image image image .";
-//     }
-// }
 
-// Span lo que quiere decir es que se extienda cada columna, extiendete 12 columnas 
 .container {
     grid-column: span 12;
     padding: $big-padding;
@@ -235,7 +196,6 @@ figure {
     }
 }
 
-// Este es para el slider
 
 .slider{
     .controls{
@@ -253,13 +213,11 @@ figure {
             }
         }
         .left-arrow{
-            // margin-right: 1.5em;
             transform: rotate(180deg);
         }
     }
     .image{
         margin-top: 0;
-        // min-height: 100vh;
         display: flex;
         align-items: center;
     }
@@ -309,11 +267,6 @@ figure {
     }
 }
 
-// .space-bottom {
-//     min-height: 100vh;
-// }
-
-// COmponente our msion
 .mission{
     align-items: center;
     .container{
@@ -328,13 +281,9 @@ figure {
         }
         p{
             line-height: 2em;
-            // &:nth-of-type(1){
-                // Este selector de arriba nos permite seleccionar uno de un conjunto de varios 
-                // En este caso un parrafo de un conjnto de 2
             &:first-of-type{
                 margin-bottom: 3em;
                 position: relative;
-                // border-bottom: solid 2px;
                 &::after{
                     content: '';
                     background-color: $blue;
@@ -343,7 +292,7 @@ figure {
                     height: 6px;
                     width:70%;
                     margin-left: -200px;
-                    z-index: -1; //Debajo de todos los elemento 
+                    z-index: -1; 
                 }
             }
         }
@@ -363,7 +312,6 @@ figure {
             }
             .row {
                 .col-md-4 {
-                    // width: 33.3333%;
                     width: 100%;
                     padding: 8px;
                     img{
@@ -412,8 +360,6 @@ figure {
     align-items: center;
 }
 
-// Ahora trabajaremos con la parte de contactos, obviamente primero para telefonos
-
 .social{
     margin-top: $big-margin-top;
     @include text-center;
@@ -430,9 +376,6 @@ figure {
     }
 }
 
-
-// Ahora que ya se genero el espacio para centrar en ambos lados.
-// Ya podremos usar los espacios vacios con punto y en pantallas grandes container vale de la 2 a la 12
 @media (min-width: 960px){
     .container{
         grid-column: 2 / 12;
@@ -479,7 +422,6 @@ figure {
                     flex-wrap: wrap;
                     box-sizing: border-box;
                     .col-md-4 {
-                        // width: 33.3333%;
                         width: 31.3333%;
                         padding: 8px;
                         img{
@@ -505,7 +447,6 @@ figure {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     column-gap: 35px;
-                    // row-gap: 40px;
                     .column{
                             .card {
                                 @include card-client;
@@ -521,7 +462,7 @@ figure {
             display: inline-block;
             margin-top: 0px;
             margin-right: 90px;
-            &:last-of-type{ // este selecciona el ultimo elemento que esta seleccionando, todos los hermanos 
+            &:last-of-type{
                 margin-right: 0px;
             }
         }
@@ -552,7 +493,6 @@ figure {
                     flex-wrap: wrap;
                     box-sizing: border-box;
                     .col-md-4 {
-                        // width: 33.3333%;
                         width: 31%;
                         padding: 7px;
                         img{

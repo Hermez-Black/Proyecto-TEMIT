@@ -50,23 +50,9 @@ export default class Slider{
 
     play(){
         this.interval = setInterval(this.innerNext, this.speed);
-        // this.interval = setInterval(function(){
-        //     this.prev();
-        // }, 7000)
     }
 
     stop(){
         clearInterval(this.interval);
     }
 }
-
-
-// let slider = new Slider([], function(){}) Esto no es legible, así que es mejor usa un json
-
-// let slider = new Slider({
-//     elements: ['Hola', 2]
-//     // animationFunc: () => {
-
-//     // }
-// });
-// slider.next();

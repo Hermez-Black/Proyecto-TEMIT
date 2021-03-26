@@ -32,5 +32,3 @@ module.exports = merge(common,{
         ]
       },
 });
-
-// https://webpack.js.org/configuration/mode/

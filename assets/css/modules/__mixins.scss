@@ -17,35 +17,29 @@
     justify-content: center;
 }
 
-// Aqui usamos un mixin para otro mixin
-
 @mixin absolute-cover {
     @include full;
-    // position: absolute; Esto se comento para el efecto parallax
-    // left: 0px;
-    // right: 0px;
 }
 
 @mixin caption {
     padding: $large-padding;
         font-weight: bold;
-        text-transform: uppercase; //Texto en mayusculas
+        text-transform: uppercase; 
         font-size: 2em;
         position: absolute;
         letter-spacing: 5px;
         width: auto;
         bottom: 0px;
-        left: 10px; //alineado a la izquierda
+        left: 10px; 
         z-index: 10;
         @include text-center;
         color: $grey;
-        // color: rgba($grey, 0.5);
 }
 
 @mixin main-text {
     font-weight: 200;
     font-size: 1.2em;
-    line-height: 1.5em; //espacio entre lineas de texto
+    line-height: 1.5em;
     h1, h2{
         font-size: $big;
         font-weight: inherit;
@@ -90,34 +84,3 @@
             }
     }
 }
-
-//     margin-top: $default-margin-top;
-                            //     display: flex;
-                            //     flex-direction: column;
-                            //     @include center-vertical-horizontal;
-                            //     padding: 10px;
-                            //     border: 2px solid #17A2B8;
-                            //     border-radius: 8px;
-                            //     .title{
-                            //         font-weight: 14;
-                            //         color: #17A2B8;
-                            //     }
-                            //     .subtitle{
-                            //         font-weight: 10;
-                            //         color: grey;
-                            //         margin-top: -10px;
-                            //     }
-                                
-                            //     .parrafo{
-                            //         letter-spacing: 0.4px;
-                            //         margin-top: -6px;
-                            //     }
-                                
-                            //     a {
-                            //         color: #17A2B8;
-                            //         letter-spacing: 0.4px;
-                            //         text-decoration: none;
-                            //         &:first-of-type{
-                            //             margin-right: 9px;
-                            //         }
-                            // }

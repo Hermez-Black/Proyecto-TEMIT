@@ -38,7 +38,7 @@ const elements = [
     {
         title: '¿Qué Ofrecemos?',
         subtitle: 'Sobre Nosotros',
-        image: '../../public/temit-images/slider/TEMIT3.png',
+        image: '../../public/temit-images/slider/temit-i (2).png',
         text: '- Construcciones, Torres-redes sistemas y cctv<br/> - Mantenimientos e instalaciones de telecomunicaciones y construcciones <br/> - Soporte técnico a computadoras<br/> - laptop y servidores por contrato o por evento'
     }
 ];
