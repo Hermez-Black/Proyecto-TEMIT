@@ -260,6 +260,10 @@ figure {
     }
 }
 
+#slider-title{
+    letter-spacing: 0.1em;
+}
+
 #slider-image{
     @include transition;
     &.hide{
