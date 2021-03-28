@@ -1,9 +1,9 @@
-const CACHE_NAME = 'STORIES_CACHE-v3';
+const CACHE_NAME = 'STORIES_CACHE-v4';
 
 self.addEventListener('install',function(){
 
   caches.open(CACHE_NAME).then(function(cache){
-    cache.addAll(['/index.html','/dist/javascript/bundle.js','/public/images/1.jpg']);
+    cache.addAll(['/index.html','/dist/javascript/bundle.js']);
   })
 });
 

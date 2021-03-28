@@ -34,7 +34,7 @@ links.forEach(link => {
         if(window.scrollTo) ev.preventDefault()
         
 
-        scrollToElement(document.querySelector(selector))
+        scrollToElement(document.querySelector(selector));
 
         return !!window.scrollTo;
     })
